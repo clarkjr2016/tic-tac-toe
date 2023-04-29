@@ -5,12 +5,3 @@
   margin: 0;
   padding: 0;
 }
-
-.gameboard {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-}
-
-.game-squares {
-}
