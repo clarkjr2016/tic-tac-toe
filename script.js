@@ -38,11 +38,26 @@ const playerTwo = Players("Player 2", "O"); // creating player two
 const GameFlow = (function () {
   const makeMove = function (player, row, column) {
     const board = GameBoard.getBoard(); // getting the state of  the board in a variable so that I'm refrencing the original object and not just creating a copy
-    console.log("Current board state: ", GameBoard.getBoard());
-    board[row][column] = player.marker; // in the position that is given give the value of the players marker
-    console.log("Changed board state: ", GameBoard.getBoard());
+    // this is calling the the getBoard function prior to the knnowledge be executed on it
+
+    const endOfRound = function () {
+      board;
+      const markerCollectionArray = [];
+      for (let i = 0; i < board[0].length; i++) {
+        markerCollectionArray.push(board[0][i]);
+      }
+    };
+
+    if (board[row][column] === 0) {
+      board[row][column] = player.marker;
+      console.log(board); // if the spot that the player chooses to place its marker is empty update it to that players marker
+      endOfRound();
+    } else {
+      console.log("This spot is already taken");
+      console.log(board);
+      // if it isn't just print a log saying that the spot is taken
+    }
   };
 
-  makeMove(playerOne, 0, 0);
-  makeMove(playerTwo, 0, 1);
+  return { makeMove };
 })();
