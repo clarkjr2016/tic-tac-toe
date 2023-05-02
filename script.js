@@ -59,5 +59,31 @@ const GameFlow = (function () {
     }
   };
 
-  return { makeMove };
+  const refresh = function (board) {
+    let row = 3;
+    let column = 3;
+    for (let i = 0; i < row; i++) {
+      board[i] = []; // this creates the rows
+      for (let j = 0; j < column; j++) {
+        board[i].push(0); //  this creates the columns
+      }
+    }
+
+    return board;
+  }; // this function is being created to reset the board back to 0;
+
+  const winningCombos = function () {
+    const regularBoard = GameBoard.getBoard();
+    const regularBoardRows = [
+      regularBoard[0],
+      regularBoard[1],
+      regularBoard[2],
+    ];
+
+    const combos = [[regularBoard[0][0], regularBoard[0][1]]];
+
+    return regularBoardRows;
+  };
+
+  return { makeMove, refresh, winningCombos };
 })();
