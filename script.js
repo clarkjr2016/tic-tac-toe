@@ -39,6 +39,8 @@ const GameFlow = (function () {
   const makeMove = function (player, row, column) {
     const board = GameBoard.getBoard(); // getting the state of  the board in a variable so that I'm refrencing the original object and not just creating a copy
     // this is calling the the getBoard function prior to the knnowledge be executed on it
+    let boardCopy = JSON.parse(JSON.stringify(board));
+    const endOfRound = function () {};
 
     if (board[row][column] === 0) {
       board[row][column] = player.marker;
@@ -49,10 +51,6 @@ const GameFlow = (function () {
       console.log(board);
       // if it isn't just print a log saying that the spot is taken
     }
-  };
-
-  const endOfRound = function (board) {
-    winningCombos();
   };
 
   const refresh = function (board) {
@@ -68,29 +66,7 @@ const GameFlow = (function () {
     return board;
   }; // this function is being created to reset the board back to 0;
 
-  const winningCombos = function () {
-    const regularBoard = GameBoard.getBoard();
-    const regularBoardRows = [
-      regularBoard[0],
-      regularBoard[1],
-      regularBoard[2],
-    ];
+  // setting up the winning combos to be reviewed whenever a move is completed.
 
-    const combos = [
-      [regularBoardRows[0][0], regularBoardRows[0][1], regularBoardRows[0][2]],
-      [regularBoardRows[1][0], regularBoardRows[1][1], regularBoardRows[1][2]],
-      [regularBoardRows[2][0], regularBoardRows[2][1], regularBoardRows[2][2]],
-      /* --- this groups all the winning row combinations --- */
-      [regularBoardRows[0][0], regularBoardRows[1][0], regularBoardRows[2][0]],
-      [regularBoardRows[0][1], regularBoardRows[1][1], regularBoardRows[2][1]],
-      [regularBoardRows[0][2], regularBoardRows[1][2], regularBoardRows[2][2]],
-      /* --- this groups all of the winning column combinations --- */
-      [regularBoardRows[0][0], regularBoardRows[1][1], regularBoardRows[2][2]],
-      [regularBoardRows[0][2], regularBoardRows[1][1], regularBoardRows[2][0]],
-    ];
-
-    return combos;
-  }; // setting up the winning combos to be reviewed whenever a move is completed.
-
-  return { makeMove, refresh, endOfRound };
+  return { makeMove, refresh };
 })();
