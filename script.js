@@ -36,11 +36,31 @@ const playerOne = Players("Player 1", "X"); // creating player one
 const playerTwo = Players("Player 2", "O"); // creating player two
 
 const GameFlow = (function () {
+  let board = GameBoard.getBoard();
+  const boardObject = {
+    topRow: board[0],
+    middleRow: board[1],
+    bottomRow: board[2],
+    left_column: [board[0][0], board[1][0], board[2][0]],
+    middle_column: [board[0][1], board[1][1], board[2][1]],
+    right_column: [board[0][2], board[1][2], board[2][2]],
+    diagonal_left: [board[0][0], board[1][1], board[2][2]],
+    diagonal_right: [board[0][2], board[1][1], board[2][0]],
+  }; // creating an object versionof all the different combos to be used later
+
   const makeMove = function (player, row, column) {
-    const board = GameBoard.getBoard(); // getting the state of  the board in a variable so that I'm refrencing the original object and not just creating a copy
+    // getting the state of  the board in a variable so that I'm refrencing the original object and not just creating a copy
     // this is calling the the getBoard function prior to the knnowledge be executed on it
-    let boardCopy = JSON.parse(JSON.stringify(board));
-    const endOfRound = function () {};
+
+    const endOfRound = function () {
+      const winningCombo = [player.marker, player.marker, player.marker];
+
+      for (const key in boardObject) {
+        if (JSON.stringify(boardObject[key]) === JSON.stringify(winningCombo)) {
+          console.log(`${player.player} won!`);
+        }
+      }
+    }; // loops through each row combination and checks to see if that specific player marker is present in all of the three entries
 
     if (board[row][column] === 0) {
       board[row][column] = player.marker;
@@ -68,5 +88,5 @@ const GameFlow = (function () {
 
   // setting up the winning combos to be reviewed whenever a move is completed.
 
-  return { makeMove, refresh };
+  return { makeMove, refresh, boardObject };
 })();
