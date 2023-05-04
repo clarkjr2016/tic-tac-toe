@@ -56,25 +56,33 @@ const GameFlow = (function () {
     boardObject.right_column = [board[0][2], board[1][2], board[2][2]];
     (boardObject.diagonal_left = [board[0][0], board[1][1], board[2][2]]),
       (boardObject.diagonal_right = [board[0][2], board[1][1], board[2][0]]);
-  };
+  }; // have to create this function to update these columns because in the original instance of the object we are just linked to the intial instnce of the board call\
+
+  const refresh = function (board) {
+    let row = 3;
+    let column = 3;
+    for (let i = 0; i < row; i++) {
+      board[i] = []; // this creates the rows
+      for (let j = 0; j < column; j++) {
+        board[i].push(0); //  this creates the columns
+      }
+    }
+    boardObject.topRow = board[0];
+    boardObject.middleRow = board[1];
+    boardObject.bottomRow = board[2];
+    boardObject.left_column = [board[0][0], board[1][0], board[2][0]];
+    boardObject.middle_column = [board[0][1], board[1][1], board[2][1]];
+    boardObject.right_column = [board[0][2], board[1][2], board[2][2]];
+    (boardObject.diagonal_left = [board[0][0], board[1][1], board[2][2]]),
+      (boardObject.diagonal_right = [board[0][2], board[1][1], board[2][0]]);
+
+    return board;
+  }; // this function is being created to reset the board back to 0;
 
   const makeMove = function (player, row, column) {
     // getting the state of  the board in a variable so that I'm refrencing the original object and not just creating a copy
     // this is calling the the getBoard function prior to the knnowledge be executed on it
-
-    const refresh = function (board) {
-      let row = 3;
-      let column = 3;
-      for (let i = 0; i < row; i++) {
-        board[i] = []; // this creates the rows
-        for (let j = 0; j < column; j++) {
-          board[i].push(0); //  this creates the columns
-        }
-      }
-
-      return board;
-    }; // this function is being created to reset the board back to 0;
-
+    board;
     const endOfRound = function () {
       board;
       const winningCombo = [player.marker, player.marker, player.marker];
@@ -101,5 +109,5 @@ const GameFlow = (function () {
 
   // setting up the winning combos to be reviewed whenever a move is completed.
 
-  return { makeMove, boardObject };
+  return { makeMove, boardObject, refresh };
 })();
