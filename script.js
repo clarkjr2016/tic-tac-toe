@@ -36,7 +36,8 @@ const playerOne = Players("Player 1", "X"); // creating player one
 const playerTwo = Players("Player 2", "O"); // creating player two
 
 const GameFlow = (function () {
-  let board = GameBoard.getBoard();
+  const board = GameBoard.getBoard();
+  board;
   const boardObject = {
     topRow: board[0],
     middleRow: board[1],
@@ -48,11 +49,34 @@ const GameFlow = (function () {
     diagonal_right: [board[0][2], board[1][1], board[2][0]],
   }; // creating an object versionof all the different combos to be used later
 
+  const updateOthers = function () {
+    const board = GameBoard.getBoard();
+    boardObject.left_column = [board[0][0], board[1][0], board[2][0]];
+    boardObject.middle_column = [board[0][1], board[1][1], board[2][1]];
+    boardObject.right_column = [board[0][2], board[1][2], board[2][2]];
+    (boardObject.diagonal_left = [board[0][0], board[1][1], board[2][2]]),
+      (boardObject.diagonal_right = [board[0][2], board[1][1], board[2][0]]);
+  };
+
   const makeMove = function (player, row, column) {
     // getting the state of  the board in a variable so that I'm refrencing the original object and not just creating a copy
     // this is calling the the getBoard function prior to the knnowledge be executed on it
 
+    const refresh = function (board) {
+      let row = 3;
+      let column = 3;
+      for (let i = 0; i < row; i++) {
+        board[i] = []; // this creates the rows
+        for (let j = 0; j < column; j++) {
+          board[i].push(0); //  this creates the columns
+        }
+      }
+
+      return board;
+    }; // this function is being created to reset the board back to 0;
+
     const endOfRound = function () {
+      board;
       const winningCombo = [player.marker, player.marker, player.marker];
 
       for (const key in boardObject) {
@@ -65,28 +89,17 @@ const GameFlow = (function () {
     if (board[row][column] === 0) {
       board[row][column] = player.marker;
       console.log(board); // if the spot that the player chooses to place its marker is empty update it to that players marker
-      endOfRound();
+      updateOthers();
+      endOfRound(); // declares winner when a winning combination is met;
     } else {
       console.log("This spot is already taken");
       console.log(board);
       // if it isn't just print a log saying that the spot is taken
     }
+    board;
   };
-
-  const refresh = function (board) {
-    let row = 3;
-    let column = 3;
-    for (let i = 0; i < row; i++) {
-      board[i] = []; // this creates the rows
-      for (let j = 0; j < column; j++) {
-        board[i].push(0); //  this creates the columns
-      }
-    }
-
-    return board;
-  }; // this function is being created to reset the board back to 0;
 
   // setting up the winning combos to be reviewed whenever a move is completed.
 
-  return { makeMove, refresh, boardObject };
+  return { makeMove, boardObject };
 })();
