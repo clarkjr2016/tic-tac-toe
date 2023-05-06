@@ -74,7 +74,7 @@ const GameFlow = (function () {
     boardObject.middle_column = [board[0][1], board[1][1], board[2][1]];
     boardObject.right_column = [board[0][2], board[1][2], board[2][2]];
     (boardObject.diagonal_left = [board[0][0], board[1][1], board[2][2]]),
-      (boardObject.diagonal_right = [board[0][2], board[1][1], board[2][0]]);
+      (boardObject.diagonal_right = [board[0][2], board[1][1], board[2][0]]); // this updates the object that has all the rows in the array so that I can assees if a player has won or not
 
     return board;
   }; // this function is being created to reset the board back to 0;
@@ -83,6 +83,17 @@ const GameFlow = (function () {
     // getting the state of  the board in a variable so that I'm refrencing the original object and not just creating a copy
     // this is calling the the getBoard function prior to the knnowledge be executed on it
     board;
+
+    const endOfRoundTie = function () {
+      const collection = Object.values(boardObject);
+      const consolidatedCollection = collection.flat(1);
+      if (consolidatedCollection.includes(0)) {
+        return;
+      } else {
+        console.log(`It's a tie`);
+      }
+    };
+
     const endOfRound = function () {
       board;
       const winningCombo = [player.marker, player.marker, player.marker];
@@ -99,6 +110,7 @@ const GameFlow = (function () {
       console.log(board); // if the spot that the player chooses to place its marker is empty update it to that players marker
       updateOthers();
       endOfRound(); // declares winner when a winning combination is met;
+      endOfRoundTie();
     } else {
       console.log("This spot is already taken");
       console.log(board);
