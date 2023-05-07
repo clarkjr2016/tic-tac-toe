@@ -84,24 +84,22 @@ const GameFlow = (function () {
     // this is calling the the getBoard function prior to the knnowledge be executed on it
     board;
 
-    const endOfRoundTie = function () {
-      const collection = Object.values(boardObject);
-      const consolidatedCollection = collection.flat(1);
-      if (consolidatedCollection.includes(0)) {
-        return;
-      } else {
-        console.log(`It's a tie`);
-      }
-    };
-
     const endOfRound = function () {
       board;
+      const collection = Object.values(boardObject); // creates an array consisting of the values from the keys in the boardObject object
+      const consolidatedCollection = collection.flat(1); // combines all of the arrays in to one
+
       const winningCombo = [player.marker, player.marker, player.marker];
 
       for (const key in boardObject) {
         if (JSON.stringify(boardObject[key]) === JSON.stringify(winningCombo)) {
-          console.log(`${player.player} won!`);
+          return console.log(`${player.player} won!`);
+        } else if (consolidatedCollection.includes(0)) {
+          return;
+        } else if (!consolidatedCollection.includes(0)) {
+          console.log(`It's a tie`);
         }
+        return;
       }
     }; // loops through each row combination and checks to see if that specific player marker is present in all of the three entries
 
@@ -110,7 +108,6 @@ const GameFlow = (function () {
       console.log(board); // if the spot that the player chooses to place its marker is empty update it to that players marker
       updateOthers();
       endOfRound(); // declares winner when a winning combination is met;
-      endOfRoundTie();
     } else {
       console.log("This spot is already taken");
       console.log(board);
