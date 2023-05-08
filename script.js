@@ -16,18 +16,22 @@ const gameBoard = (function () {
 // module pattern for gameboard and gameboard display
 
 const Player = function (player, marker) {
-  return { player, marker };
+  return { player, marker, isActive: false };
 };
 
 // player factory function
 
 const GameFlow = (function () {
-  console.log(gameBoard.gameBoardDisplay);
+  const playerOne = Player("Player 1", "O");
+  const playerTwo = Player("Player 2", "X");
+
+  playerOne.isActive = true;
+
+  let playerArray = [playerOne, playerTwo];
+
+  console.log(playerArray);
 
   gameBoard.gameBoardDisplay.forEach((cell) => {
-    cell.addEventListener("click", (e) => {
-      e.target.innerHTML = "Hello";
-    });
     cell.removeEventListener;
   });
 
