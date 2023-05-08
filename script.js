@@ -1,47 +1,35 @@
 const gameBoard = (function () {
   //Private variables
-  let gameBoardDisplay = ["x", "x", "x", "o", "o", "o", "x", "x", "x"];
+  let gameBoardDisplay = Array.from(
+    document.querySelector(".gameboard").children
+  );
 
-  return { gameBoardDisplay };
+  gameBoardDisplay.values;
+
+  function getboard() {
+    return gameBoardDisplay;
+  }
+
+  return { gameBoardDisplay, getboard };
 })();
 
 // module pattern for gameboard and gameboard display
 
-let player = function (marker) {
-  const isSelected = false;
-
-  return { marker, isSelected };
+const Player = function (player, marker) {
+  return { player, marker };
 };
 
 // player factory function
 
-const displayController = (function () {
-  const top_left = document.querySelector(".game-squares.top-left");
-  top_left.innerText = gameBoard.gameBoardDisplay[0];
+const GameFlow = (function () {
+  console.log(gameBoard.gameBoardDisplay);
 
-  const top_middle = document.querySelector(".game-squares.top-middle");
-  top_middle.innerText = gameBoard.gameBoardDisplay[1];
-
-  const top_right = document.querySelector(".game-squares.top-right");
-  top_right.innerText = gameBoard.gameBoardDisplay[2];
-
-  const middle_left = document.querySelector(".game-squares.middle-left");
-  middle_left.innerText = gameBoard.gameBoardDisplay[3];
-
-  const middle_middle = document.querySelector(".game-squares.middle-middle");
-  middle_middle.innerText = gameBoard.gameBoardDisplay[4];
-
-  const middle_right = document.querySelector(".game-squares.middle-right");
-  middle_right.innerText = gameBoard.gameBoardDisplay[5];
-
-  const bottom_left = document.querySelector(".game-squares.bottom-left");
-  bottom_left.innerText = gameBoard.gameBoardDisplay[6];
-
-  const bottom_middle = document.querySelector(".game-squares.bottom-middle");
-  bottom_middle.innerText = gameBoard.gameBoardDisplay[7];
-
-  const bottom_right = document.querySelector(".game-squares.bottom-right");
-  bottom_right.innerText = gameBoard.gameBoardDisplay[8];
+  gameBoard.gameBoardDisplay.forEach((cell) => {
+    cell.addEventListener("click", (e) => {
+      e.target.innerHTML = "Hello";
+    });
+    cell.removeEventListener;
+  });
 
   const x_button = document.querySelector("X");
 
