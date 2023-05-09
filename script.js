@@ -35,7 +35,7 @@ const GameFlow = (function () {
   gameBoard.gameBoardDisplay.forEach((cell) => {
     cell.addEventListener("click", (e) => {
       playerArray.forEach((player) => {
-        if (player.isActive === true) {
+        if (player.isActive === true && e.target.innerText === "") {
           e.target.innerText = player.marker; // setting the cell to the player with the active status
           player.isActive = false; // setting the player's marker that was originally true to false
         } else {
