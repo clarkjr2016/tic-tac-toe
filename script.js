@@ -46,7 +46,7 @@ const GameFlow = (function () {
       },
       { once: true } // added the "once" option to remove the original event listener so that the event listener wouldn't be triggered if a cell that already has a value was clicked again.
     ); // event listener to add marker to cells;
-  });
+  }); // adds markers to the cell
 
   const x_button = document.querySelector("X");
 

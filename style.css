@@ -6,10 +6,21 @@
   padding: 0;
 }
 
+body {
+  min-height: 100vh;
+}
+
+.gameBoardContainer {
+  min-height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .gameboard {
   border: solid 1px black;
-  width: 300px;
-  height: 300px;
+  width: 900px;
+  height: 900px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -17,9 +28,10 @@
 
 .game-squares {
   border: solid 1px black;
-  height: 100px;
-  width: 100px;
+  height: 300px;
+  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 100px;
 }
