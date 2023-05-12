@@ -83,7 +83,6 @@ const GameFlow = (function () {
           if (player.isActive === true && e.target.innerText === "") {
             e.target.innerText = player.marker; // setting the cell to the player with the active status
             player.isActive = false;
-            console.log(player.marker);
 
             let gameBoardValues = {
               topRow: [
@@ -134,14 +133,14 @@ const GameFlow = (function () {
               player.marker,
             ];
 
-            console.log(winningCombinations);
-
-            for (const row in gameBoardValues) {
-              if (gameBoardValues[row] === winningCombinations) {
-                console.log(`${player.player} won`);
+            for (let row in gameBoardValues) {
+              if (
+                JSON.stringify(gameBoardValues[row]) ===
+                JSON.stringify(winningCombinations)
+              ) {
+                console.log("Game Over");
               }
             }
-            console.log(gameBoardValues);
           } else {
             player.isActive = true;
           }
