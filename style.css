@@ -10,17 +10,27 @@ body {
   min-height: 100vh;
 }
 
-.gameBoardContainer {
-  min-height: inherit;
+#display {
+  height: 100px;
+  width: 300px;
+  border: 5px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.gameBoardContainer {
+  min-height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .gameboard {
   border: solid 1px black;
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -28,8 +38,8 @@ body {
 
 .game-squares {
   border: solid 1px black;
-  height: 200px;
-  width: 200px;
+  height: 166px;
+  width: 166px;
   display: flex;
   justify-content: center;
   align-items: center;

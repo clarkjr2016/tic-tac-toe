@@ -68,12 +68,15 @@ const GameFlow = (function () {
   const playerOne = Player("Player 1", "O");
   const playerTwo = Player("Player 2", "X"); // creating the players in the game
 
+  let gameDisplay = document.querySelector("#display");
+
+  gameDisplay.innerText = "O's turn";
+
   let playerArray = [playerOne, playerTwo]; // placing the two players into an array to cycle between in a below function
 
   playerOne.isActive = true;
   console.log(playerArray);
   console.log(gameBoard.gameBoardDisplay);
-  const roundSequence = function () {};
 
   gameBoard.gameBoardDisplay.forEach((cell) => {
     cell.addEventListener(
@@ -83,6 +86,9 @@ const GameFlow = (function () {
           if (player.isActive === true && e.target.innerText === "") {
             e.target.innerText = player.marker; // setting the cell to the player with the active status
             player.isActive = false;
+            e.target.innerText === "X"
+              ? (gameDisplay.innerText = "O's turn")
+              : (gameDisplay.innerText = "X's turn"); // updates display as game goes along
 
             let gameBoardValues = {
               topRow: [
@@ -138,9 +144,13 @@ const GameFlow = (function () {
                 JSON.stringify(gameBoardValues[row]) ===
                 JSON.stringify(winningCombinations)
               ) {
-                console.log("Game Over");
+                gameDisplay.innerText = `${player.marker} Won!`;
               }
             }
+
+            const tieCheck = Object.values(gameBoardValues);
+
+            console.log(tieCheck);
           } else {
             player.isActive = true;
           }
@@ -149,9 +159,5 @@ const GameFlow = (function () {
       { once: true } // added the "once" option to remove the original event listener so that the event listener wouldn't be triggered if a cell that already has a value was clicked again.
     ); // event listener to add marker to cells;
   }); // adds markers to the cell
-
-  const x_button = document.querySelector("X");
-
-  const o_button = document.querySelector("O");
 })();
 // Module design for controlling how the gameboard display looks and how it will be returned
