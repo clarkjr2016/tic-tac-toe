@@ -85,6 +85,7 @@ const GameFlow = (function () {
       "click",
       function addMarker(e) {
         if (roundOver === false) {
+          // this is what allows for the winning conditions to go through
           playerArray.forEach((player) => {
             if (player.isActive === true && e.target.innerText === "") {
               e.target.innerText = player.marker; // setting the cell to the player with the active status
@@ -153,8 +154,11 @@ const GameFlow = (function () {
               }
 
               const tieCheck = Object.values(gameBoardValues);
+              const consolidatedCollection = tieCheck.flat(1);
 
-              console.log(tieCheck);
+              if (!consolidatedCollection.includes("")) {
+                gameDisplay.innerText = "Tie Game";
+              }
             } else {
               player.isActive = true;
             }
